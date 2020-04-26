@@ -1,6 +1,7 @@
 class ContentsController < ApplicationController
   def index
     @content = Content.new
+    @contents = Content.all
   end
 
   def show

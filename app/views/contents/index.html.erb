@@ -1,3 +1,28 @@
+<h2>Contents</h2>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th>Title</th>
+          <th>Image</th>
+          <th>Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @contents.each do |content| %>
+        <tr>
+          <td><%= content.title %></td>
+          <td><%= content.image %></td>
+          <td><%= content.detail %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+</div>
+
 <%= form_for @content do |f| %>
   <%= f.file_field :image %>
   <%= f.submit 'アップロードする'%>
