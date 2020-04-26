@@ -1,6 +1,5 @@
 class ContentsController < ApplicationController
   def index
-    @content = Content.new
     @contents = Content.all
   end
 
@@ -8,6 +7,7 @@ class ContentsController < ApplicationController
   end
 
   def new
+    @content = Content.new
   end
 
   def edit
