@@ -11,6 +11,11 @@
 
   <body>
     <div class="container">
+    <% if flash[:notice] %>
+      <div class="text-success"><%= flash[:notice] %></div>
+    <% elsif flash[:alert] %>
+      <div class="text-danger"><%= flash[:alert] %></div>
+    <% end %>
     <%= yield %>
     </div>
   </body>

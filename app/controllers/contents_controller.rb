@@ -15,12 +15,18 @@ class ContentsController < ApplicationController
   
   def create
     @content = Content.new(content_params)
+    if @content.save
+      redirect_to root_path, notice: 'Success!'
+    else
+      flash.now[:alert] = 'Save error!'
+      render :new
+    end
   end
   
   private
   
   def content_params
-    params.require(:content).permit(:image)
+    params.require(:content).permit(:title, :image, :detail)
   end
   
 end
