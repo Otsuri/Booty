@@ -1,2 +1,29 @@
-<h1>Contents#edit</h1>
-<p>Find me in app/views/contents/edit.html.erb</p>
+<div>
+  <div class="col-md-4 offset-md-4">
+    <h2 class="text-center">Edit Content</h2>
+    
+      <%= form_with model: @content, local:true do |f| %>
+        
+        <div class="form-group">
+          <label>Title</label>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <label>Image</label>
+            <div><%= image_tag @content.image.to_s, :width => '300' %></div>
+        </div>
+        
+        <div class="form-group">
+          <label>Detail</label>
+          <%= f.text_area :detail, class: "form-control" %>
+        </div>
+        
+        <div class="text-center">
+          <%= f.submit "Save", class: "btn btn-primary" %>
+        </div>
+        
+      <% end %>
+      
+  </div>
+</div>
