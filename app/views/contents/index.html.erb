@@ -13,7 +13,7 @@
         <% @contents.each do |content| %>
         <tr>
           <td><%= content.title %></td>
-          <td><%= content.image %></td>
+          <td><%= image_tag content.image.to_s, :width => '200' %></td>
           <td><%= content.detail %></td>
         </tr>
         <% end %>
