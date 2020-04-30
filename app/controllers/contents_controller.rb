@@ -24,6 +24,12 @@ class ContentsController < ApplicationController
     end
   end
   
+  def destroy
+    @content = Content.find(params[:id])
+    @content.destroy
+    redirect_to root_path, notice: 'Success!'
+  end
+  
   def create
     @content = Content.new(content_params)
     if @content.save

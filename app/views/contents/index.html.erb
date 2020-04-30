@@ -16,7 +16,10 @@
           <td><%= content.title %></td>
           <td><%= image_tag content.image.to_s, :width => '200' %></td>
           <td><%= content.detail %></td>
-          <td><%= link_to 'Edit', edit_content_path(content) %></td>
+          <td>
+            [<%= link_to 'Edit', edit_content_path(content) %>]
+            [<%= link_to 'Delete', content_path(content), method: :delete, data:{ confirm: 'Are you sure?' } %>]
+          </td>
         </tr>
         <% end %>
       </tbody>

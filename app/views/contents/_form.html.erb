@@ -1,0 +1,33 @@
+<%= form_with model: @content, local:true do |f| %>
+  
+  <div class="form-group">
+    <label>Title</label>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+  
+  <div class="form-group">
+    <label>Image</label>
+    <%= image_tag @content.image.to_s, :width => '300' %>
+    <img id="preview" width="300">
+    <%= f.file_field :image %>
+    <script type="text/javascript">
+    $('#content_image').on('change', function (e) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $("#preview").attr('src', e.target.result);
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    });
+    </script>
+  </div>
+  
+  <div class="form-group">
+    <label>Detail</label>
+    <%= f.text_area :detail, class: "form-control" %>
+  </div>
+  
+  <div class="text-center">
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  </div>
+  
+<% end %>
