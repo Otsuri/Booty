@@ -27,6 +27,14 @@ class TagsController < ApplicationController
     end
   end
   
+  def destroy
+    @content = Content.find(params[:content_id])
+    @tag = Tag.find(params[:id])
+    
+    @tag.destroy
+    redirect_to content_path(@content), notice: 'Success!'
+  end
+  
   private
   def tag_params
     params.require(:tag).permit(:name, :content_id)

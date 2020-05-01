@@ -25,7 +25,7 @@
               <td><%= tag.name %></td>
               <td>
                 [<%= link_to 'Edit', edit_content_tag_path(@content, tag) %>]
-                [Delete]
+                [<%= link_to 'Delete', content_tag_path(@content, tag), method: :delete %>]
               </td>
             </tr>
             <% end %>
