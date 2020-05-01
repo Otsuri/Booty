@@ -1,9 +1,11 @@
 class ContentsController < ApplicationController
   def index
-    @contents = Content.all
+    @contents = Content.all.order(created_at: :desc)
   end
 
   def show
+    @content = Content.find(params[:id])
+    @tag = Tag.new
   end
 
   def new
