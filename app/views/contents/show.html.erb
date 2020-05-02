@@ -11,39 +11,21 @@
     
     <div>
       <h3>Tag</h3>
-      <table class="table table-striped">
         <% if @content.tags.any? %>
-          <thead class="thead-light">
-            <tr>
-              <td>Name</td>
-              <td>Menu</td>
-            </tr>
-          </thead>
-          <tbody>
-            <% @content.tags.each do |tag| %>
-            <tr>
-              <td><%= tag.name %></td>
-              <td>
-                [<%= link_to 'Edit', edit_content_tag_path(@content, tag) %>]
-                [<%= link_to 'Delete', content_tag_path(@content, tag), method: :delete %>]
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
+          <% @content.tags.each do |tag| %>
+            <%= link_to '#' + tag.name, edit_content_tag_path(@content, tag) %> 
+          <% end %>
         <% else %>
-          <p>No tag yet.</p>
+          No tag yet.
         <% end %>
-        
-        
-      </table>
     </div>
+    <hr>
     
     <h3>Attach new tag.</h3>
     
     <%= form_with model: [@content, @tag], local: true do |f| %>
       <%= f.hidden_field :content_id, { value: @content.id } %>
       <div class="form-group">
-        <label>Name</label>
         <%= f.text_field :name, class: 'form-control' %>
       </div>
       <div class="text-center">

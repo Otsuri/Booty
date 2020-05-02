@@ -1,10 +1,11 @@
 class ContentsController < ApplicationController
+  before_action :set_content, only: [:show, :edit, :update, :destroy]
+  
   def index
     @contents = Content.all.order(created_at: :desc)
   end
 
   def show
-    @content = Content.find(params[:id])
     @tag = Tag.new
   end
 
@@ -13,11 +14,9 @@ class ContentsController < ApplicationController
   end
 
   def edit
-    @content = Content.find(params[:id])
   end
   
   def update
-    @content = Content.find(params[:id])
     if @content.update(content_params)
       redirect_to root_path, notice: 'Success!'
     else
@@ -27,7 +26,6 @@ class ContentsController < ApplicationController
   end
   
   def destroy
-    @content = Content.find(params[:id])
     @content.destroy
     redirect_to root_path, notice: 'Success!'
   end
@@ -43,6 +41,10 @@ class ContentsController < ApplicationController
   end
   
   private
+  
+  def set_content
+    @content = Content.find(params[:id])
+  end
   
   def content_params
     params.require(:content).permit(:title, :image, :detail)

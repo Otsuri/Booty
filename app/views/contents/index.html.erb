@@ -6,7 +6,7 @@
         <tr>
           <th>Title</th>
           <th>Image</th>
-          <th>Detail</th>
+          <th>Tag</th>
           <th>Menu</th>
         </tr>
       </thead>
@@ -15,7 +15,15 @@
         <tr>
           <td><%= content.title %></td>
           <td><%= link_to image_tag(content.image.to_s, width: '200'), content_path(content) %></td>
-          <td><%= content.detail %></td>
+          <td>
+            <% if content.tags.any? %>
+              <% content.tags.each do |tag| %>
+                <%= link_to '#' + tag.name, edit_content_tag_path(content, tag) %> 
+              <% end %>
+            <% else %>
+              No tag yet.
+            <% end %>
+          </td>
           <td>
             [<%= link_to 'Edit', edit_content_path(content) %>]
             [<%= link_to 'Delete', content_path(content), method: :delete, data:{ confirm: 'Are you sure?' } %>]
