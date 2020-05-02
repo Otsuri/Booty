@@ -1,4 +1,7 @@
 <h2>Contents</h2>
+<div>
+  <%= link_to 'New Content', new_content_path %>
+</div>
 <div class="row">
   <div class="col-md-12">
     <table class="table table-striped">
@@ -18,7 +21,7 @@
           <td>
             <% if content.tags.any? %>
               <% content.tags.each do |tag| %>
-                <%= link_to '#' + tag.name, edit_content_tag_path(content, tag) %> 
+                <%= '#' + tag.name %> 
               <% end %>
             <% else %>
               No tag yet.
@@ -32,8 +35,5 @@
         <% end %>
       </tbody>
     </table>
-    <div>
-      <%= link_to 'New Content', new_content_path %>
-    </div>
   </div>
 </div>
