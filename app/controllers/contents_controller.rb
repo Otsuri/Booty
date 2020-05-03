@@ -7,6 +7,7 @@ class ContentsController < ApplicationController
 
   def show
     @tag = Tag.new
+    @ttag = Ttag.new
   end
 
   def new

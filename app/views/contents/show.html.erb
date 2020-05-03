@@ -23,7 +23,7 @@
     
     <h3>Attach new tag.</h3>
     
-    <%= form_with model: [@content, @tag], local: true do |f| %>
+    <%= form_with model: [@content, @ttag], local: true do |f| %>
       <%= f.hidden_field :content_id, { value: @content.id } %>
       <div class="form-group">
         <%= f.text_field :name, class: 'form-control' %>
