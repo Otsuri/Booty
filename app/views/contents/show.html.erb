@@ -11,9 +11,9 @@
     
     <div>
       <h3>Tag</h3>
-        <% if @content.tags.any? %>
-          <% @content.tags.each do |tag| %>
-            <%= link_to '#' + tag.name, edit_content_tag_path(@content, tag) %> 
+        <% if @content.contents_ttags.any? %>
+          <% @content.contents_ttags.each do |contents_ttag| %>
+            <%= link_to '#' + contents_ttag.ttag.name, edit_content_ttag_path(@content, contents_ttag.ttag) %> 
           <% end %>
         <% else %>
           No tag yet.
