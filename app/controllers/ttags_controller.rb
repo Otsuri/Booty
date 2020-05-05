@@ -12,28 +12,28 @@ class TtagsController < ApplicationController
   end
   
   def edit
-    # @content = Content.find(params[:content_id])
-    # @ttag = Ttag.find(params[:id])
+    @content = Content.find(params[:content_id])
+    @ttag = Ttag.find(params[:id])
   end
   
   def update
-    # @content = Content.find(params[:content_id])
-    # @tag = Tag.find(params[:id])
+    @content = Content.find(params[:content_id])
+    @ttag = Ttag.find(params[:id])
     
-    # if @tag.update(tag_params)
-    #   redirect_to content_path(@content), notice: 'Success!'
-    # else
-    #   flash.now[:alert] = 'Invalid!'
-    #   render :edit
-    # end
+    if @ttag.update(ttag_params)
+      redirect_to content_path(@content), notice: 'Success!'
+    else
+      flash.now[:alert] = 'Invalid!'
+      render :edit
+    end
   end
   
   def destroy
-    # @content = Content.find(params[:content_id])
-    # @tag = Tag.find(params[:id])
+    @content = Content.find(params[:content_id])
+    @ttag = Ttag.find(params[:id])
     
-    # @tag.destroy
-    # redirect_to content_path(@content), notice: 'Success!'
+    @ttag.destroy
+    redirect_to content_path(@content), notice: 'Success!'
   end
   
   private

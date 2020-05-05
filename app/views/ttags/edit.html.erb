@@ -1,2 +1,12 @@
-<h1>Ttags#edit</h1>
-<p>Find me in app/views/ttags/edit.html.erb</p>
+<div>
+  <h2>Edit tag</h2>
+  <%= form_with model: [@content, @ttag], local: true do |f| %>
+    <div class="form-group">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="text-center">
+      <%= f.submit "Update", class: 'btn btn-primary' %>
+      <%= link_to "Delete", content_ttag_path(@content, @ttag), method: :delete, class: 'btn btn-secondary btn-sm' %>
+    </div>
+  <% end %>
+</div>

@@ -27,7 +27,21 @@ class ContentsController < ApplicationController
   end
   
   def destroy
+    ttagids = []
+    @content.contents_ttags.each do |contents_tag|
+      ttagids.push(contents_tag.ttag.id)
+    end
     @content.destroy
+    
+    @contents_ttag = ContentsTtag.all
+    ttagids.each do |ttagid|
+      if @contents_ttag.any? {|ct| ct.ttag_id == ttagid}
+      else
+        @ttag = Ttag.find(ttagid)
+        @ttag.destroy
+      end
+    end
+    
     redirect_to root_path, notice: 'Success!'
   end
   
