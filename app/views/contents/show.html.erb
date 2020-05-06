@@ -21,15 +21,13 @@
     </div>
     <hr>
     
-    <h3>Attach new tag.</h3>
-    
     <%= form_with model: [@content, @tag], local: true do |f| %>
       <%= f.hidden_field :content_id, { value: @content.id } %>
       <div class="form-group">
         <%= f.text_field :name, class: 'form-control' %>
       </div>
       <div class="text-center">
-        <%= f.submit "Attach", class: 'btn btn-primary' %>
+        <%= f.submit "Attach new tag", class: 'btn btn-primary' %>
       </div>
     <% end %>
     

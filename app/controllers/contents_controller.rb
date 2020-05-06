@@ -32,9 +32,9 @@ class ContentsController < ApplicationController
     end
     @content.destroy
     
-    @contents_tag = ContentsTag.all
+    contents_tag = ContentsTag.all
     tagids.each do |tagid|
-      if @contents_tag.any? {|ct| ct.tag_id == tagid}
+      if contents_tag.any? { |ct| ct.tag_id == tagid }
       else
         @tag = Tag.find(tagid)
         @tag.destroy
