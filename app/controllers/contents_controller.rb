@@ -7,7 +7,6 @@ class ContentsController < ApplicationController
 
   def show
     @tag = Tag.new
-    @ttag = Ttag.new
   end
 
   def new
@@ -27,18 +26,18 @@ class ContentsController < ApplicationController
   end
   
   def destroy
-    ttagids = []
-    @content.contents_ttags.each do |contents_tag|
-      ttagids.push(contents_tag.ttag.id)
+    tagids = []
+    @content.contents_tags.each do |contents_tag|
+      tagids.push(contents_tag.tag.id)
     end
     @content.destroy
     
-    @contents_ttag = ContentsTtag.all
-    ttagids.each do |ttagid|
-      if @contents_ttag.any? {|ct| ct.ttag_id == ttagid}
+    @contents_tag = ContentsTag.all
+    tagids.each do |tagid|
+      if @contents_tag.any? {|ct| ct.tag_id == tagid}
       else
-        @ttag = Ttag.find(ttagid)
-        @ttag.destroy
+        @tag = Tag.find(tagid)
+        @tag.destroy
       end
     end
     

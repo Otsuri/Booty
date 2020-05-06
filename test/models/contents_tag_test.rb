@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TtagTest < ActiveSupport::TestCase
+class ContentsTagTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

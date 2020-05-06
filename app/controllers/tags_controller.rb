@@ -3,6 +3,7 @@ class TagsController < ApplicationController
   def create
     @content = Content.find(params[:content_id])
     @tag = Tag.new
+    @tag.contents << @content
     if @tag.update(tag_params)
       redirect_to content_path(@content), notice: 'Success!'
     else
@@ -37,6 +38,6 @@ class TagsController < ApplicationController
   
   private
   def tag_params
-    params.require(:tag).permit(:name, :content_id)
+    params.require(:tag).permit(:name)
   end
 end

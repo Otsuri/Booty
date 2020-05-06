@@ -1,4 +1,6 @@
 class Tag < ApplicationRecord
-  belongs_to :content
+  has_many :contents_tags, dependent: :destroy
+  has_many :contents, through: :contents_tags
+  
   validates :name, presence: true
 end
