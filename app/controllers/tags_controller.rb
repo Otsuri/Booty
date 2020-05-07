@@ -42,9 +42,17 @@ class TagsController < ApplicationController
   
   def destroy
     @content = Content.find(params[:content_id])
-    @tag = Tag.find(params[:id])
+    @contents_tag = ContentsTag.find_by(content_id: params[:content_id], tag_id: params[:id])
+    @contents_tag.destroy
     
-    @tag.destroy
+    contents_tag = ContentsTag.all
+    
+    if contents_tag.any?{ |ct| ct.tag_id == params[:id].to_i }
+    else
+      @tag = Tag.find(params[:id])
+      @tag.destroy
+    end
+    
     redirect_to content_path(@content), notice: 'Success!'
   end
   
