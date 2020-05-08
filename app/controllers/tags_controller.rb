@@ -3,21 +3,30 @@ class TagsController < ApplicationController
   def create
     @content = Content.find(params[:content_id])
     
-    tag = Tag.all
-    if tag.any?{ |t| t.name == tag_params[:name] }
-      
-      @contents_tag = ContentsTag.new
-      @contents_tag.update(content_id: params[:content_id], tag_id: Tag.find_by(name: tag_params[:name]).id)
-      redirect_to content_path(@content), notice:'Success!'
-      
+    if tag_params[:name].include?('#') || tag_params[:name].include?("\s") || tag_params[:name].include?("　")
+      redirect_to content_path(@content), alert: 'Invalid!'
     else
-      
-      @tag = Tag.new
-      @tag.contents << @content
-      if @tag.update(tag_params)
-        redirect_to content_path(@content), notice: 'Success!'
+    
+      tag = Tag.all
+      if tag.any?{ |t| t.name == tag_params[:name] }
+        
+        @contents_tag = ContentsTag.new
+        if @contents_tag.update(content_id: params[:content_id], tag_id: Tag.find_by(name: tag_params[:name]).id)
+          redirect_to content_path(@content), notice:'Success!'
+        else
+          redirect_to content_path(@content), alert: 'Already exists!'
+        end
+        
       else
-        redirect_to content_path(@content), alert: 'Invalid!'
+        
+        @tag = Tag.new
+        @tag.contents << @content
+        if @tag.update(tag_params)
+          redirect_to content_path(@content), notice: 'Success!'
+        else
+          redirect_to content_path(@content), alert: 'Invalid!'
+        end
+        
       end
       
     end
