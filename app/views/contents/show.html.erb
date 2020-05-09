@@ -10,7 +10,6 @@
     <hr>
     
     <div>
-      <h3>Tag</h3>
         <% if @content.contents_tags.any? %>
           <% @content.contents_tags.each do |contents_tag| %>
             <%= link_to '#' + contents_tag.tag.name, edit_content_tag_path(@content, contents_tag.tag) %> 
