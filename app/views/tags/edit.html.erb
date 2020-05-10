@@ -1,12 +1,15 @@
 <div>
-  <h2>Edit tag</h2>
+  <h2>タグを編集</h2>
   <%= form_with model: [@content, @tag], local: true do |f| %>
     <div class="form-group">
       <%= f.text_field :name, class: 'form-control' %>
     </div>
     <div class="text-center">
-      <%= f.submit "Update", class: 'btn btn-primary' %>
-      <%= link_to "Delete", content_tag_path(@content, @tag), method: :delete, class: 'btn btn-secondary btn-sm' %>
+      <%= f.submit "上書き", class: 'btn btn-primary' %>
+      <%= link_to "削除", content_tag_path(@content, @tag), method: :delete, class: 'btn btn-secondary btn-sm' %>
+    </div>
+    <div>
+      <%= link_to '> 戻る', content_path(@content) %>
     </div>
   <% end %>
 </div>
