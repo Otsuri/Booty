@@ -2,7 +2,7 @@ class ContentsController < ApplicationController
   before_action :set_content, only: [:show, :edit, :update, :destroy]
   
   def index
-    @contents = Content.all.order(created_at: :desc)
+    @contents = Content.page(params[:page]).per(5).order(created_at: :desc)
   end
 
   def show

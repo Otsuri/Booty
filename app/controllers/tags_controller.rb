@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+  before_action :set_content_and_tag, only: [:edit, :update, :destroy]
   
   def create
     @content = Content.find(params[:content_id])
@@ -7,7 +8,9 @@ class TagsController < ApplicationController
     if tag.any?{ |t| t.name == tag_params[:name] }
       
       @contents_tag = ContentsTag.new
-      if @contents_tag.update(content_id: params[:content_id], tag_id: Tag.find_by(name: tag_params[:name]).id)
+      same_tagid = Tag.find_by(name: tag_params[:name]).id
+      
+      if @contents_tag.update(content_id: params[:content_id], tag_id: same_tagid)
         redirect_to content_path(@content), notice:'Success!'
       else
         redirect_to content_path(@content), alert: 'Already exists!'
@@ -28,14 +31,9 @@ class TagsController < ApplicationController
   end
   
   def edit
-    @content = Content.find(params[:content_id])
-    @tag = Tag.find(params[:id])
   end
   
   def update
-    @content = Content.find(params[:content_id])
-    @tag = Tag.find(params[:id])
-    
     if @tag.update(tag_params)
       redirect_to content_path(@content), notice: 'Success!'
     else
@@ -45,7 +43,6 @@ class TagsController < ApplicationController
   end
   
   def destroy
-    @content = Content.find(params[:content_id])
     @contents_tag = ContentsTag.find_by(content_id: params[:content_id], tag_id: params[:id])
     @contents_tag.destroy
     
@@ -53,7 +50,6 @@ class TagsController < ApplicationController
     
     if contents_tag.any?{ |ct| ct.tag_id == params[:id].to_i }
     else
-      @tag = Tag.find(params[:id])
       @tag.destroy
     end
     
@@ -61,6 +57,12 @@ class TagsController < ApplicationController
   end
   
   private
+  
+  def set_content_and_tag
+    @content = Content.find(params[:content_id])
+    @tag = Tag.find(params[:id])
+  end
+  
   def tag_params
     params.require(:tag).permit(:name)
   end
