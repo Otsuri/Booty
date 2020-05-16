@@ -7,6 +7,7 @@ class ContentsController < ApplicationController
 
   def show
     @tag = Tag.new
+    $url = request.url
   end
 
   def new
