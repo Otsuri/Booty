@@ -34,6 +34,19 @@ class TagsController < ApplicationController
     redirect_to content_path(@content), notice: 'Success!'
   end
   
+  def show
+    @contents = Content.all
+    
+    contentids = []
+    @contents.each do |content|
+      if content.contents_tags.any?{ |cct| cct.tag_id == params[:id].to_i }
+        contentids.push(content.id)
+      end
+    end
+    
+    @contents = Kaminari.paginate_array(Content.where(id: contentids).order(created_at: :desc)).page(params[:page]).per(5)
+  end
+  
   private
   
   def set_content_and_tag

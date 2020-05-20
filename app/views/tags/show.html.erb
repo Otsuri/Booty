@@ -1,0 +1,6 @@
+<h2>戦利品一覧</h2>
+<h4><%= '#' + Tag.find(params[:id]).name %></h4>
+
+<%= render 'contents/list' %>
+
+<%= link_to '> Home', root_path %>
